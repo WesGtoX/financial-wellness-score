@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.model import UserFinancialLife, FinancialWellnessScore
 from app.config import Settings
 
 app = FastAPI()
@@ -13,3 +14,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.post('/calculate-score/', responses={200: {}})
+async def calculate_score(user_financial_life: UserFinancialLife) -> FinancialWellnessScore:
+    return user_financial_life.result()
