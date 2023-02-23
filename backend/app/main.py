@@ -4,7 +4,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.model import UserFinancialLife, FinancialWellnessScore
 from app.config import Settings
 
-app = FastAPI()
+app = FastAPI(
+    title='Financial Wellness Score API',
+    description='API to calculate financial wellness score',
+)
 settings = Settings()
 
 app.add_middleware(
