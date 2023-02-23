@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    image: app:backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/backend
+    environment:
+      - ALLOW_ORIGINS=["http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"]
+  
+  frontend:
+    build: ./frontend
+    image: app:frontend
+    command: npm run host
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/frontend

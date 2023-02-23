@@ -16,4 +16,4 @@ RUN pip install --upgrade pip && \
 # copy project
 COPY . /app
 
-CMD ["uvicorn", "app.main:app", "--host 0.0.0.0:8000", "--reload"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
